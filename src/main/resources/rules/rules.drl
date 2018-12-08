@@ -1,6 +1,7 @@
 package com.drools.example
 
 import com.drools.example.Career.Question;
+import com.drools.example.Career.CurrentQuestion;
 import com.drools.example.Career.Answer;
 import com.drools.example.Career.Solution
 import java.sql.SQLOutput;
@@ -18,7 +19,9 @@ rule "Q1"
 	when
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
-		insert(question1);
+	    question1.setAnswer(Answer.NO);
+	    CurrentQuestion currentQuestion = new CurrentQuestion(question1);
+		insert(currentQuestion);
 		System.out.println(question1.questionText);
 end
 
@@ -26,20 +29,21 @@ end
 rule "Q2"
     when
         q: Question(index==1, answer==Answer.YES);
+        cQ: CurrentQuestion(question == q);
     then
         Question question2 = new Question("Marks higher than 60%", 2);
-        retract(q);
-        insert(question2);
+        cQ.setQuestion(question2);
+        update(cQ);
 		System.out.println(question2.questionText);
 end
 
 //Q1-NO
 rule "Q1-sol"
     when
-        q: Question(index==1, answer==Answer.NO);
+        cQ: CurrentQuestion(question.getIndex()==1, question.getAnswer()==Answer.NO);
     then
         Solution solution = new Solution("Become a hippie");
-        retract(q);
+        retract(cQ);
         insert(solution);
 		System.out.println(solution.solutionText);
 end
@@ -109,6 +113,7 @@ rule "Q7"
         Question question7 = new Question("Interested in sciences", 7);
         retract(q);
         insert(question7);
+
         System.out.println(question7.questionText);
 end
 
@@ -133,7 +138,3 @@ rule "Q5-sol"
         insert(solution);
         System.out.println(solution.solutionText);
 end
-//
-//rule "Q9"
-//    when
-//        Question(index==6, answer==Answer.YES);

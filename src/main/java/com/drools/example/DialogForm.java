@@ -11,24 +11,9 @@ public class DialogForm {
     private JPanel mainPanel;
 
     public DialogForm(){
-        yesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"Yes");
-            }
-        });
-        noButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"No");
-            }
-        });
-        maybeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"Maybe");
-            }
-        });
+        yesButton.addActionListener(e -> JOptionPane.showMessageDialog(null,"Yes"));
+        noButton.addActionListener(e -> JOptionPane.showMessageDialog(null,"No"));
+        maybeButton.addActionListener(e -> JOptionPane.showMessageDialog(null,"Maybe"));
     }
 
     public static void main(String[] args) {

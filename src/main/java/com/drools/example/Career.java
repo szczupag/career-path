@@ -12,10 +12,27 @@ public class Career {
 
     public static enum Answer {YES, NO, MAYBE};
 
+    public static class CurrentQuestion{
+        public Question question;
+
+        public CurrentQuestion(Question question){
+            this.question = question;
+        }
+
+        public Question getQuestion() {
+            return question;
+        }
+
+        public void setQuestion(Question question) {
+            this.question = question;
+        }
+    }
+
     public static class Question{
         public String questionText;
         public Answer answer;
         public Integer index;
+        public Boolean enableMaybe;
 
         public Question(String questionText, Integer index) {
             this.questionText = questionText;
@@ -30,8 +47,24 @@ public class Career {
             this.answer = answer;
         }
 
+        public void setEnableMaybe(Boolean enableMaybe) {
+            this.enableMaybe = enableMaybe;
+        }
+
+        public Boolean getEnableMaybe() {
+            return enableMaybe;
+        }
+
         public Answer getAnswer() {
             return answer;
+        }
+
+        public Integer getIndex() {
+            return index;
+        }
+
+        public void setIndex(Integer index) {
+            this.index = index;
         }
     }
 
