@@ -18,7 +18,6 @@ rule "Q1"
 	when
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
-//	    question1.setAnswer(Answer.YES);
 		insert(question1);
 		System.out.println(question1.questionText);
 end
@@ -26,10 +25,10 @@ end
 //Q1-YES
 rule "Q2"
     when
-        Question(index==1, answer==Answer.YES);
+        q: Question(index==1, answer==Answer.YES);
     then
         Question question2 = new Question("Marks higher than 60%", 2);
-//        question2.setAnswer(Answer.NO);
+        retract(q);
         insert(question2);
 		System.out.println(question2.questionText);
 end
@@ -37,9 +36,10 @@ end
 //Q1-NO
 rule "Q1-sol"
     when
-        Question(index==1, answer==Answer.NO);
+        q: Question(index==1, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a hippie");
+        retract(q);
         insert(solution);
 		System.out.println(solution.solutionText);
 end
@@ -47,9 +47,10 @@ end
 //Q2-YES
 rule "Q3"
     when
-        Question(index==2, answer==Answer.YES);
+        q: Question(index==2, answer==Answer.YES);
     then
         Question question3 = new Question("Willing to study hard", 3);
+        retract(q);
         insert(question3);
         System.out.println(question3.questionText);
 end
@@ -57,12 +58,12 @@ end
 //Q2-NO or Q8-NO or Q5-NO
 rule "Q4"
     when
-        Question((index==2 && answer==Answer.NO)
+        q: Question((index==2 && answer==Answer.NO)
         || (index==8 && answer==Answer.NO)
         || (index==5 && answer==Answer.NO));
     then
         Question question4 = new Question("Want further schooling", 4);
-//        question4.setAnswer(Answer.NO);
+        retract(q);
         insert(question4);
         System.out.println(question4.questionText);
 end
@@ -70,9 +71,10 @@ end
 //Q3-MAYBE
 rule "Q3-sol"
     when
-        Question(index==3, answer==Answer.MAYBE);
+        q: Question(index==3, answer==Answer.MAYBE);
     then
         Solution solution = new Solution("Go to work for a year");
+        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -80,10 +82,10 @@ end
 //Q3-NO or Q8-YES
 rule "Q5"
     when
-        Question((index==3 && answer==Answer.NO)||(index==8 && answer==Answer.YES));
+        q: Question((index==3 && answer==Answer.NO)||(index==8 && answer==Answer.YES));
     then
         Question question5 = new Question("Will it last", 5);
-//        question5.setAnswer(Answer.NO);
+        retract(q);
         insert(question5);
         System.out.println(question5.questionText);
 end
@@ -91,9 +93,10 @@ end
 //Q3-YES
 rule "Q6"
     when
-        Question(index==3, answer==Answer.MAYBE);
+        q: Question(index==3, answer==Answer.MAYBE);
     then
         Question question6 = new Question("Do you want to help society", 6);
+        retract(q);
         insert(question6);
         System.out.println(question6.questionText);
 end
@@ -101,9 +104,10 @@ end
 //Q4-YES
 rule "Q7"
     when
-        Question(index==4, answer==Answer.YES);
+        q: Question(index==4, answer==Answer.YES);
     then
         Question question7 = new Question("Interested in sciences", 7);
+        retract(q);
         insert(question7);
         System.out.println(question7.questionText);
 end
@@ -111,10 +115,10 @@ end
 //Q4-NO
 rule "Q8"
     when
-        Question(index==4, answer==Answer.NO);
+        q: Question(index==4, answer==Answer.NO);
     then
         Question question8 = new Question("Can you get a job", 8);
-//        question8.setAnswer(Answer.YES);
+        retract(q);
         insert(question8);
         System.out.println(question8.questionText);
 end
@@ -122,13 +126,14 @@ end
 //Q5-YES
 rule "Q5-sol"
     when
-        Question(index==5, answer==Answer.YES);
+        q: Question(index==5, answer==Answer.YES);
     then
         Solution solution = new Solution("Continue as long as you can");
+        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
-
-rule "Q9"
-    when
-        Question(index==6, answer==Answer.YES);
+//
+//rule "Q9"
+//    when
+//        Question(index==6, answer==Answer.YES);
