@@ -17,11 +17,12 @@ end
 //INITIAL QUESTION
 rule "Q1"
 	when
+	    cQ: CurrentQuestion(question.getIndex()==0);
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
 	    question1.setAnswer(Answer.NO);
-	    CurrentQuestion currentQuestion = new CurrentQuestion(question1);
-		insert(currentQuestion);
+	    cQ.setQuestion(question1);
+	    update(cQ);
 		System.out.println(question1.questionText);
 end
 
@@ -44,7 +45,7 @@ rule "Q1-sol"
     then
         Solution solution = new Solution("Become a hippie");
         retract(cQ);
-        insert(solution);
+//        insert(solution);
 		System.out.println(solution.solutionText);
 end
 

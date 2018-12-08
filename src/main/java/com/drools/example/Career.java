@@ -15,6 +15,9 @@ public class Career {
     public static class CurrentQuestion{
         public Question question;
 
+        public CurrentQuestion() {
+        }
+
         public CurrentQuestion(Question question){
             this.question = question;
         }
@@ -37,6 +40,10 @@ public class Career {
         public Question(String questionText, Integer index) {
             this.questionText = questionText;
             this.index = index;
+
+        }
+
+        public Question() {
         }
 
         public String toString() {
@@ -87,6 +94,7 @@ public class Career {
         Logger.getLogger(Career.class).setLevel(Level.OFF);
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession session = kContainer.newKieSession("ksession-rules");
+        session.insert(new CurrentQuestion(new Question("dupa", 0)));
         session.fireAllRules();
     }
 
