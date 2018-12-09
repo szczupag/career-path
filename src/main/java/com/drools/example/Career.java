@@ -12,25 +12,6 @@ public class Career {
 
     public static enum Answer {YES, NO, MAYBE};
 
-    public static class CurrentQuestion{
-        public Question question;
-
-        public CurrentQuestion() {
-        }
-
-        public CurrentQuestion(Question question){
-            this.question = question;
-        }
-
-        public Question getQuestion() {
-            return question;
-        }
-
-        public void setQuestion(Question question) {
-            this.question = question;
-        }
-    }
-
     public static class Question{
         public String questionText;
         public Answer answer;
@@ -48,6 +29,14 @@ public class Career {
 
         public String toString() {
             return questionText;
+        }
+
+        public String getQuestionText() {
+            return questionText;
+        }
+
+        public void setQuestionText(String questionText) {
+            this.questionText = questionText;
         }
 
         public void setAnswer(Answer answer) {
@@ -94,7 +83,6 @@ public class Career {
         Logger.getLogger(Career.class).setLevel(Level.OFF);
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession session = kContainer.newKieSession("ksession-rules");
-        session.insert(new CurrentQuestion(new Question("dupa", 0)));
         session.fireAllRules();
     }
 
