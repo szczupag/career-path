@@ -43,6 +43,7 @@ rule "Q2"
     then
         Question question2 = new Question("Marks higher than 60%", 2);
 	    getAnswer(frame, question2, false);
+	    retract(q);
 	    insert(question2);
 		System.out.println(question2.questionText);
 end
@@ -53,6 +54,8 @@ rule "Q1-sol"
         q: Question(index==1, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a hippie");
+        retract(q);
+        insert(solution);
 		System.out.println(solution.solutionText);
 end
 
@@ -126,7 +129,6 @@ rule "Q7"
         getAnswer(frame, question7, false);
         retract(q);
         insert(question7);
-
         System.out.println(question7.questionText);
 end
 
@@ -306,10 +308,11 @@ end
 function void displaySolution(JFrame frame, Solution solution) {
         final JPanel panel = new JPanel();
         panel.add(new JLabel(solution.solutionText));
-        JOptionPane.showMessageDialog(frame, panel);
+        JOptionPane.showMessageDialog(frame, panel, "Should you be an engineer?", JOptionPane.PLAIN_MESSAGE);
 }
 
 function Question getAnswer(JFrame frame, Question question, boolean containsMaybe) {
+
 
         class ButtonListener implements ItemListener {
                     private Question question;
@@ -352,7 +355,7 @@ function Question getAnswer(JFrame frame, Question question, boolean containsMay
             panel.add(buttons.get(i));
         }
 
-        JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showConfirmDialog(frame, panel, "Should you be an engineer?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         return question;
 }
