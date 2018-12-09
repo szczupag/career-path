@@ -1,17 +1,10 @@
 package com.drools.example
 
 import com.drools.example.Career.Question;
+import com.drools.example.Career.CurrentQuestion;
 import com.drools.example.Career.Answer;
 import com.drools.example.Career.Solution
-import javax.swing.*
-import java.awt.GridLayout
-import java.util.ArrayList
-import java.awt.event.ItemListener
-import java.awt.event.ItemEvent
-import java.util.Arrays;
-import org.kie.api.runtime.KieRuntime
-
-global JFrame frame
+import java.sql.SQLOutput;
 
 //STOP
 rule "Solution"
@@ -24,10 +17,10 @@ end
 //INITIAL QUESTION
 rule "Q1"
 	when
+	    cQ: CurrentQuestion();
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
-	    question1 = getAnswer(frame, question1, false, kcontext.getKieRuntime());
-
+	    cQ.setQuestion(question1);
 	    insert(question1);
 		System.out.println(question1.questionText);
 end
@@ -36,17 +29,25 @@ end
 rule "Q2"
     when
         q: Question(index==1, answer==Answer.YES);
+        cQ: CurrentQuestion();
     then
         Question question2 = new Question("Marks higher than 60%", 2);
+        cQ.setQuestion(question2);
+        retract(q);
+        insert(question2);
 		System.out.println(question2.questionText);
 end
 
 //Q1-NO
 rule "Q1-sol"
     when
-     q: Question(index==1, answer==Answer.NO);
+        q: Question(index==1, answer==Answer.YES);
+        cQ: CurrentQuestion();
     then
         Solution solution = new Solution("Become a hippie");
+        retract(cQ);
+        retract(q);
+        insert(solution);
 		System.out.println(solution.solutionText);
 end
 
@@ -54,8 +55,11 @@ end
 rule "Q3"
     when
         q: Question(index==2, answer==Answer.YES);
+        cQ: CurrentQuestion();
     then
         Question question3 = new Question("Willing to study hard", 3);
+        question3.setEnableMaybe(true);
+        cQ.setQuestion(question3);
         retract(q);
         insert(question3);
         System.out.println(question3.questionText);
@@ -67,8 +71,10 @@ rule "Q4"
         q: Question((index==2 && answer==Answer.NO)
         || (index==8 && answer==Answer.NO)
         || (index==5 && answer==Answer.NO));
+        cQ: CurrentQuestion();
     then
         Question question4 = new Question("Want further schooling", 4);
+        cQ.setQuestion(question4);
         retract(q);
         insert(question4);
         System.out.println(question4.questionText);
@@ -78,8 +84,10 @@ end
 rule "Q3-sol"
     when
         q: Question(index==3, answer==Answer.MAYBE);
+        cQ: CurrentQuestion();
     then
         Solution solution = new Solution("Go to work for a year");
+        retract(cQ);
         retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
@@ -89,8 +97,10 @@ end
 rule "Q5"
     when
         q: Question((index==3 && answer==Answer.NO)||(index==8 && answer==Answer.YES));
+        cQ: CurrentQuestion();
     then
         Question question5 = new Question("Will it last", 5);
+        cQ.setQuestion(question5);
         retract(q);
         insert(question5);
         System.out.println(question5.questionText);
@@ -100,8 +110,10 @@ end
 rule "Q6"
     when
         q: Question(index==3, answer==Answer.MAYBE);
+        cQ: CurrentQuestion();
     then
         Question question6 = new Question("Do you want to help society", 6);
+        cQ.setQuestion(question6);
         retract(q);
         insert(question6);
         System.out.println(question6.questionText);
@@ -111,8 +123,10 @@ end
 rule "Q7"
     when
         q: Question(index==4, answer==Answer.YES);
+        cQ: CurrentQuestion();
     then
         Question question7 = new Question("Interested in sciences", 7);
+        cQ.setQuestion(question7);
         retract(q);
         insert(question7);
 
@@ -123,8 +137,10 @@ end
 rule "Q8"
     when
         q: Question(index==4, answer==Answer.NO);
+        cQ: CurrentQuestion();
     then
         Question question8 = new Question("Can you get a job", 8);
+        cQ.setQuestion(question8);
         retract(q);
         insert(question8);
         System.out.println(question8.questionText);
@@ -140,53 +156,3 @@ rule "Q5-sol"
         insert(solution);
         System.out.println(solution.solutionText);
 end
-
-function Question getAnswer(JFrame frame, Question question, boolean containsMaybe, KieRuntime krt) {
-
-        class ButtonListener implements ItemListener {
-                    private Question question;
-                    private Answer answer;
-                    public ButtonListener(Question question, Answer answer) {
-                            this.question = question;
-                            this.answer = answer;
-                    }
-
-                    @Override
-                    public void itemStateChanged(ItemEvent event) {
-                            if (event.getStateChange() == ItemEvent.SELECTED) {
-                                question.setAnswer(answer);
-                            }
-                    }
-                }
-
-        final JPanel panel = new JPanel(new GridLayout (0,1));
-        panel.add(new JLabel(question.getQuestionText()));
-        ArrayList<JRadioButton> buttons = new ArrayList<>();
-
-        JRadioButton yesButton = new JRadioButton(Answer.YES.toString());
-        yesButton.addItemListener(new ButtonListener(question, Answer.YES));
-
-        JRadioButton noButton = new JRadioButton(Answer.NO.toString());
-        noButton.addItemListener(new ButtonListener(question, Answer.NO));
-
-        JRadioButton maybeButton = new JRadioButton(Answer.MAYBE.toString());
-        maybeButton.addItemListener(new ButtonListener(question, Answer.MAYBE));
-
-        if(containsMaybe) {
-            buttons.addAll(Arrays.asList(yesButton, noButton, maybeButton));
-        } else {
-            buttons.addAll(Arrays.asList(yesButton, noButton));
-        }
-
-        ButtonGroup group = new ButtonGroup();
-        for (int i=0;i<buttons.size();i++) {
-            group.add(buttons.get(i));
-            panel.add(buttons.get(i));
-        }
-
-        Object[] options = {"Proceed"};
-        		if( JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE)<0){
-        		}
-
-        return question;
-}
