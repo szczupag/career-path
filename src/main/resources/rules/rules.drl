@@ -305,6 +305,13 @@ end
 
 
 function Question getAnswer(JFrame frame, Question question, boolean containsMaybe, KieRuntime krt) {
+function void displaySolution(JFrame frame, Solution solution) {
+        final JPanel panel = new JPanel();
+        panel.add(new JLabel(solution.solutionText));
+        JOptionPane.showMessageDialog(frame, panel);
+}
+
+function Question getAnswer(JFrame frame, Question question, boolean containsMaybe) {
 
         class ButtonListener implements ItemListener {
                     private Question question;
@@ -347,9 +354,7 @@ function Question getAnswer(JFrame frame, Question question, boolean containsMay
             panel.add(buttons.get(i));
         }
 
-        Object[] options = {"Proceed"};
-        		if( JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE)<0){
-        		}
+        JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
         return question;
 }
