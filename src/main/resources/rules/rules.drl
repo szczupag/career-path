@@ -1,10 +1,17 @@
 package com.drools.example
 
 import com.drools.example.Career.Question;
-import com.drools.example.Career.CurrentQuestion;
 import com.drools.example.Career.Answer;
 import com.drools.example.Career.Solution
-import java.sql.SQLOutput;
+import javax.swing.*
+import java.awt.GridLayout
+import java.util.ArrayList
+import java.awt.event.ItemListener
+import java.awt.event.ItemEvent
+import java.util.Arrays;
+import org.kie.api.runtime.KieRuntime
+
+global JFrame frame
 
 //STOP
 rule "Solution"
@@ -17,12 +24,11 @@ end
 //INITIAL QUESTION
 rule "Q1"
 	when
-	    cQ: CurrentQuestion(question.getIndex()==0);
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
-	    question1.setAnswer(Answer.NO);
-	    cQ.setQuestion(question1);
-	    update(cQ);
+	    question1 = getAnswer(frame, question1, false, kcontext.getKieRuntime());
+
+	    insert(question1);
 		System.out.println(question1.questionText);
 end
 
@@ -30,22 +36,17 @@ end
 rule "Q2"
     when
         q: Question(index==1, answer==Answer.YES);
-        cQ: CurrentQuestion(question == q);
     then
         Question question2 = new Question("Marks higher than 60%", 2);
-        cQ.setQuestion(question2);
-        update(cQ);
 		System.out.println(question2.questionText);
 end
 
 //Q1-NO
 rule "Q1-sol"
     when
-        cQ: CurrentQuestion(question.getIndex()==1, question.getAnswer()==Answer.NO);
+     q: Question(index==1, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a hippie");
-        retract(cQ);
-//        insert(solution);
 		System.out.println(solution.solutionText);
 end
 
@@ -139,3 +140,53 @@ rule "Q5-sol"
         insert(solution);
         System.out.println(solution.solutionText);
 end
+
+function Question getAnswer(JFrame frame, Question question, boolean containsMaybe, KieRuntime krt) {
+
+        class ButtonListener implements ItemListener {
+                    private Question question;
+                    private Answer answer;
+                    public ButtonListener(Question question, Answer answer) {
+                            this.question = question;
+                            this.answer = answer;
+                    }
+
+                    @Override
+                    public void itemStateChanged(ItemEvent event) {
+                            if (event.getStateChange() == ItemEvent.SELECTED) {
+                                question.setAnswer(answer);
+                            }
+                    }
+                }
+
+        final JPanel panel = new JPanel(new GridLayout (0,1));
+        panel.add(new JLabel(question.getQuestionText()));
+        ArrayList<JRadioButton> buttons = new ArrayList<>();
+
+        JRadioButton yesButton = new JRadioButton(Answer.YES.toString());
+        yesButton.addItemListener(new ButtonListener(question, Answer.YES));
+
+        JRadioButton noButton = new JRadioButton(Answer.NO.toString());
+        noButton.addItemListener(new ButtonListener(question, Answer.NO));
+
+        JRadioButton maybeButton = new JRadioButton(Answer.MAYBE.toString());
+        maybeButton.addItemListener(new ButtonListener(question, Answer.MAYBE));
+
+        if(containsMaybe) {
+            buttons.addAll(Arrays.asList(yesButton, noButton, maybeButton));
+        } else {
+            buttons.addAll(Arrays.asList(yesButton, noButton));
+        }
+
+        ButtonGroup group = new ButtonGroup();
+        for (int i=0;i<buttons.size();i++) {
+            group.add(buttons.get(i));
+            panel.add(buttons.get(i));
+        }
+
+        Object[] options = {"Proceed"};
+        		if( JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE)<0){
+        		}
+
+        return question;
+}
