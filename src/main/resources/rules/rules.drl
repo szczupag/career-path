@@ -3,13 +3,18 @@ package com.drools.example
 import com.drools.example.Career.Question;
 import com.drools.example.Career.Answer;
 import com.drools.example.Career.Solution
-import javax.swing.*
 import java.awt.GridLayout
 import java.util.ArrayList
 import java.awt.event.ItemListener
 import java.awt.event.ItemEvent
 import java.util.Arrays;
 import org.kie.api.runtime.KieRuntime
+import javax.swing.JPanel
+import javax.swing.JLabel
+import javax.swing.JRadioButton
+import javax.swing.ButtonGroup
+import javax.swing.JOptionPane
+import javax.swing.JFrame
 
 global JFrame frame
 
@@ -26,7 +31,7 @@ rule "Q1"
 	when
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
-	    question1 = getAnswer(frame, question1, false, kcontext.getKieRuntime());
+	    question1 = getAnswer(frame, question1, false);
 
 	    insert(question1);
 		System.out.println(question1.questionText);
@@ -38,6 +43,7 @@ rule "Q2"
         q: Question(index==1, answer==Answer.YES);
     then
         Question question2 = new Question("Marks higher than 60%", 2);
+        question2 = getAnswer(frame, question2, false);
 		System.out.println(question2.questionText);
 end
 
@@ -47,6 +53,7 @@ rule "Q1-sol"
      q: Question(index==1, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a hippie");
+        displaySolution(frame, solution);
 		System.out.println(solution.solutionText);
 end
 
@@ -141,7 +148,13 @@ rule "Q5-sol"
         System.out.println(solution.solutionText);
 end
 
-function Question getAnswer(JFrame frame, Question question, boolean containsMaybe, KieRuntime krt) {
+function void displaySolution(JFrame frame, Solution solution) {
+        final JPanel panel = new JPanel();
+        panel.add(new JLabel(solution.solutionText));
+        JOptionPane.showMessageDialog(frame, panel);
+}
+
+function Question getAnswer(JFrame frame, Question question, boolean containsMaybe) {
 
         class ButtonListener implements ItemListener {
                     private Question question;
@@ -184,9 +197,7 @@ function Question getAnswer(JFrame frame, Question question, boolean containsMay
             panel.add(buttons.get(i));
         }
 
-        Object[] options = {"Proceed"};
-        		if( JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE)<0){
-        		}
+        JOptionPane.showConfirmDialog(frame, panel, "Question", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
         return question;
 }
