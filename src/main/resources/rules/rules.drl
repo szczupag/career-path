@@ -21,9 +21,9 @@ global JFrame frame
 //STOP
 rule "Solution"
     when
-        Solution();
+        s: Solution();
     then
-        System.out.println("STOP");
+        displaySolution(frame, s);
 end
 
 //INITIAL QUESTION
@@ -31,7 +31,7 @@ rule "Q1"
 	when
 	then
 	    Question question1 = new Question("Do you want a responsible job", 1);
-	    getAnswer(frame, question1, false, kcontext.getKieRuntime());
+	    getAnswer(frame, question1, false);
 	    insert(question1);
 		System.out.println(question1.questionText);
 end
@@ -42,7 +42,7 @@ rule "Q2"
         q: Question(index==1, answer==Answer.YES);
     then
         Question question2 = new Question("Marks higher than 60%", 2);
-	    getAnswer(frame, question2, false, kcontext.getKieRuntime());
+	    getAnswer(frame, question2, false);
 	    insert(question2);
 		System.out.println(question2.questionText);
 end
@@ -62,7 +62,7 @@ rule "Q3"
         q: Question(index==2, answer==Answer.YES);
     then
         Question question3 = new Question("Willing to study hard", 3);
-        getAnswer(frame, question3, true, kcontext.getKieRuntime());
+        getAnswer(frame, question3, true);
         retract(q);
         insert(question3);
         System.out.println(question3.questionText);
@@ -76,7 +76,7 @@ rule "Q4"
         || (index==5 && answer==Answer.NO));
     then
         Question question4 = new Question("Want further schooling", 4);
-        getAnswer(frame, question4, false, kcontext.getKieRuntime());
+        getAnswer(frame, question4, false);
         retract(q);
         insert(question4);
         System.out.println(question4.questionText);
@@ -99,7 +99,7 @@ rule "Q5"
         q: Question((index==3 && answer==Answer.NO)||(index==8 && answer==Answer.YES));
     then
         Question question5 = new Question("Will it last", 5);
-        getAnswer(frame, question5, false, kcontext.getKieRuntime());
+        getAnswer(frame, question5, false);
         retract(q);
         insert(question5);
         System.out.println(question5.questionText);
@@ -111,7 +111,7 @@ rule "Q6"
         q: Question(index==3, answer==Answer.MAYBE);
     then
         Question question6 = new Question("Do you want to help society", 6);
-        getAnswer(frame, question6, false, kcontext.getKieRuntime());
+        getAnswer(frame, question6, false);
         retract(q);
         insert(question6);
         System.out.println(question6.questionText);
@@ -123,7 +123,7 @@ rule "Q7"
         q: Question(index==4, answer==Answer.YES);
     then
         Question question7 = new Question("Interested in sciences", 7);
-        getAnswer(frame, question7, false, kcontext.getKieRuntime());
+        getAnswer(frame, question7, false);
         retract(q);
         insert(question7);
 
@@ -136,7 +136,7 @@ rule "Q8"
         q: Question(index==4, answer==Answer.NO);
     then
         Question question8 = new Question("Can you get a job", 8);
-        getAnswer(frame, question8, false, kcontext.getKieRuntime());
+        getAnswer(frame, question8, false);
         retract(q);
         insert(question8);
         System.out.println(question8.questionText);
@@ -159,7 +159,7 @@ rule "Q9"
         q: Question(index==6, answer==Answer.YES);
     then
         Question question9 = new Question("Are you good in english or french", 9);
-        getAnswer(frame, question9, false, kcontext.getKieRuntime());
+        getAnswer(frame, question9, false);
         retract(q);
         insert(question9);
         System.out.println(question9.questionText);
@@ -182,7 +182,7 @@ rule "Q10"
         q: Question(index==7, answer==Answer.YES);
     then
         Question question10 = new Question("Like outdoor work", 10);
-        getAnswer(frame, question10, false, kcontext.getKieRuntime());
+        getAnswer(frame, question10, false);
         retract(q);
         insert(question10);
         System.out.println(question10.questionText);
@@ -205,7 +205,7 @@ rule "Q11"
         q: Question(index==9, answer==Answer.YES);
     then
         Question question11 = new Question("Want to become rich", 11);
-        getAnswer(frame, question11, false, kcontext.getKieRuntime());
+        getAnswer(frame, question11, false);
         retract(q);
         insert(question11);
         System.out.println(question11.questionText);
@@ -228,7 +228,7 @@ rule "Q12"
         q: Question(index==10, answer==Answer.YES);
     then
         Question question12 = new Question("Like biology", 12);
-        getAnswer(frame, question12, false, kcontext.getKieRuntime());
+        getAnswer(frame, question12, false);
         retract(q);
         insert(question12);
         System.out.println(question12.questionText);
@@ -240,7 +240,7 @@ rule "Q13"
         q: Question(index==10, answer==Answer.NO);
     then
         Question question13 = new Question("Like electronics", 13);
-        getAnswer(frame, question13, false, kcontext.getKieRuntime());
+        getAnswer(frame, question13, false);
         retract(q);
         insert(question13);
         System.out.println(question13.questionText);
@@ -252,7 +252,7 @@ rule "Q14"
         q: Question(index==11, answer==Answer.NO);
     then
         Question question14 = new Question("Interested in practical problems", 14);
-        getAnswer(frame, question14, false, kcontext.getKieRuntime());
+        getAnswer(frame, question14, false);
         retract(q);
         insert(question14);
         System.out.println(question14.questionText);
@@ -286,7 +286,7 @@ rule "Q15"
         q: Question(index==14, answer==Answer.YES);
     then
         Question question15 = new Question("Think these questions are endless", 15);
-        getAnswer(frame, question15, false, kcontext.getKieRuntime());
+        getAnswer(frame, question15, false);
         retract(q);
         insert(question15);
         System.out.println(question15.questionText);
@@ -303,8 +303,6 @@ rule "Q14-sol"
         System.out.println(solution.solutionText);
 end
 
-
-function Question getAnswer(JFrame frame, Question question, boolean containsMaybe, KieRuntime krt) {
 function void displaySolution(JFrame frame, Solution solution) {
         final JPanel panel = new JPanel();
         panel.add(new JLabel(solution.solutionText));
