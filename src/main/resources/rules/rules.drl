@@ -495,7 +495,7 @@ rule "Q41"
     when
         q: Question(index==13, answer==Answer.NO);
     then
-         Question question41 = new Question("Like geology", 41);
+         Question question41 = new Question("Like working in shop", 41);
          getAnswer(frame, question41, false);
          insert(question41);
          System.out.println(question41.questionText);
@@ -507,6 +507,7 @@ rule "Q41-sol"
         q: Question(index==41, answer==Answer.YES);
     then
          Solution solution = new Solution("Take machine shop course");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
@@ -538,6 +539,7 @@ rule "Q43-sol"
         q: Question(index==43, answer==Answer.YES);
     then
          Solution solution = new Solution("Take drafting course");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
@@ -564,11 +566,12 @@ rule "Q45"
 end
 
 //Q44-NO
-rule "Q43-sol"
+rule "Q44-sol"
     when
         q: Question(index==44, answer==Answer.NO);
     then
          Solution solution = new Solution("Go jump in the lake");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
@@ -578,6 +581,7 @@ rule "Q45-sol-yes"
         q: Question(index==45, answer==Answer.YES);
     then
          Solution solution = new Solution("Take chemical technology course");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
@@ -587,6 +591,7 @@ rule "Q45-sol-no"
         q: Question(index==45, answer==Answer.NO);
     then
          Solution solution = new Solution("Consult calendar for other solutions");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
