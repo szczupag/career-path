@@ -601,15 +601,6 @@ rule "Q29-SOL-2"
          System.out.println(solution.solutionText);
 end
 
-
-
-
-
-
-
-
-
-
 function void getAnswer(JFrame frame, Question question, boolean containsMaybe) {
 
     final JPanel panel = new JPanel(new GridLayout (0,1));
