@@ -292,6 +292,7 @@ rule "Q15-sol"
         q: Question(index==15, answer==Answer.YES);
     then
         Solution solution = new Solution("You are too realistic to be an engineer");
+        insert(solution);
         System.out.println(solution.solutionText);
 end
 
@@ -323,6 +324,7 @@ rule "Q16-sol"
         q: Question(index==16, answer==Answer.NO);
     then
         Solution solution = new Solution("This flow sheet can not help you");
+        insert(solution);
         System.out.println(solution.solutionText);
 end
 
@@ -343,6 +345,7 @@ rule "Q17-sol"
         q: Question(index==17, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a field biologist");
+        insert(solution);
         System.out.println(solution.solutionText);
 end
 
@@ -363,6 +366,7 @@ rule "Q18-sol"
         q: Question(index==18, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a technical journalist");
+        insert(solution);
         System.out.println(solution.solutionText);
 end
 
@@ -383,6 +387,7 @@ rule "Q19-sol"
         q: Question(index==19, answer==Answer.NO);
     then
         Solution solution = new Solution("This flow sheet can not help you");
+        insert(solution);
         System.out.println(solution.solutionText);
 end
 
@@ -403,6 +408,7 @@ rule "Q20-sol"
         q: Question(index==20, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a research scientist");
+        insert(solution);
         System.out.println(solution.solutionText);
 end
 
@@ -434,6 +440,7 @@ rule "Q22-SOL"
         q: Question(index==22, answer==Answer.YES);
     then
          Solution solution = new Solution("Take 4 years of electrical engineering");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
@@ -476,6 +483,7 @@ rule "Q24-SOL"
         q: Question(index==24, answer==Answer.YES);
     then
          Solution solution = new Solution("Take 4 years of chemical engineering");
+         insert(solution);
          System.out.println(solution.solutionText);
 end
 
@@ -489,6 +497,118 @@ rule "Q27"
          insert(question23);
          System.out.println(question23.questionText);
 end
+
+//Q25-YES
+rule "Q25-SOL"
+    when
+        q: Question(index==25, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Take 4 years of mining engineering");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q25-NO
+rule "Q25-SOL-2"
+    when
+        q: Question(index==25, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take 4 years of petroleum engineering");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q26-YES
+rule "Q27-II"
+    when
+        q: Question(index==26, answer==Answer.YES);
+    then
+         Question question27 = new Question("Interested in agriculture", 27);
+         getAnswer(frame, question27, false);
+         insert(question27);
+         System.out.println(question27.questionText);
+end
+
+//Q26-NO
+rule "Q28"
+    when
+        q: Question(index==26, answer==Answer.NO);
+    then
+         Question question28 = new Question("Are you still with us", 28);
+         getAnswer(frame, question28, false);
+         insert(question28);
+         System.out.println(question28.questionText);
+end
+
+//Q27-YES
+rule "Q27-SOL"
+    when
+        q: Question(index==27, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take 4 years of agricultural engineering");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q27-NO
+rule "Q27-SOL-2"
+    when
+        q: Question(index==27, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Take 4 years of mechanical engineering");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q28-YES
+rule "Q29"
+    when
+        q: Question(index==28, answer==Answer.YES);
+    then
+        Question question29 = new Question("Like construction problems", 29);
+        getAnswer(frame, question29, false);
+        insert(question29);
+        System.out.println(question29.questionText);
+end
+
+//Q28-NO
+rule "Q28-SOL"
+    when
+        q: Question(index==28, answer==Answer.NO);
+    then
+         Solution solution = new Solution("This flow-sheet can not help you");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q29-YES
+rule "Q29-SOL"
+    when
+        q: Question(index==29, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take 4 years of civil engineering");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q29-NO
+rule "Q29-SOL-2"
+    when
+        q: Question(index==29, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Consult calendar for other options");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+
+
+
+
+
+
+
+
 
 function void getAnswer(JFrame frame, Question question, boolean containsMaybe) {
 
