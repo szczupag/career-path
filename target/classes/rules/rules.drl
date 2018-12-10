@@ -1,0 +1,650 @@
+package com.drools.example
+
+import com.drools.example.Career.Question;
+import com.drools.example.Career.Answer;
+import com.drools.example.Career.Solution
+import java.awt.GridLayout
+import java.util.ArrayList
+import java.awt.event.ItemListener
+import java.awt.event.ItemEvent
+import java.util.Arrays;
+import org.kie.api.runtime.KieRuntime
+import javax.swing.JRadioButton
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.ButtonGroup
+import javax.swing.JOptionPane
+import javax.swing.JFrame
+import java.util.List
+import java.awt.Color
+import javax.swing.ImageIcon
+import java.net.URL
+
+global JFrame frame
+
+//STOP
+rule "Solution"
+    when
+        s: Solution();
+    then
+        displaySolution(frame, s);
+end
+
+//INITIAL QUESTION
+rule "Q1"
+	when
+	then
+	    Question question1 = new Question("Do you want a responsible job", 1);
+	    getAnswer(frame, question1, false);
+	    insert(question1);
+		System.out.println(question1.questionText);
+end
+
+//Q1-YES
+rule "Q2"
+    when
+        q: Question(index==1, answer==Answer.YES);
+    then
+        Question question2 = new Question("Marks higher than 60%", 2);
+	    getAnswer(frame, question2, false);
+	    insert(question2);
+		System.out.println(question2.questionText);
+end
+
+//Q1-NO
+rule "Q1-sol"
+    when
+        q: Question(index==1, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Become a hippie");
+        insert(solution);
+		System.out.println(solution.solutionText);
+end
+
+//Q2-YES
+rule "Q3"
+    when
+        q: Question(index==2, answer==Answer.YES);
+    then
+        Question question3 = new Question("Willing to study hard", 3);
+        getAnswer(frame, question3, true);
+        insert(question3);
+        System.out.println(question3.questionText);
+end
+
+//Q2-NO or Q8-NO or Q5-NO
+rule "Q4"
+    when
+        q: Question((index==2 && answer==Answer.NO)
+        || (index==8 && answer==Answer.NO)
+        || (index==5 && answer==Answer.NO));
+    then
+        Question question4 = new Question("Want further schooling", 4);
+        getAnswer(frame, question4, false);
+        insert(question4);
+        System.out.println(question4.questionText);
+end
+
+//Q3-MAYBE
+rule "Q3-sol"
+    when
+        q: Question(index==3, answer==Answer.MAYBE);
+    then
+        Solution solution = new Solution("Go to work for a year");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q3-NO or Q8-YES
+rule "Q5"
+    when
+        q: Question((index==3 && answer==Answer.NO)||(index==8 && answer==Answer.YES));
+    then
+        Question question5 = new Question("Will it last", 5);
+        getAnswer(frame, question5, false);
+        insert(question5);
+        System.out.println(question5.questionText);
+end
+
+//Q3-YES
+rule "Q6"
+    when
+        q: Question(index==3, answer==Answer.YES);
+    then
+        Question question6 = new Question("Do you want to help society", 6);
+        getAnswer(frame, question6, false);
+        insert(question6);
+        System.out.println(question6.questionText);
+end
+
+//Q4-YES
+rule "Q7"
+    when
+        q: Question(index==4, answer==Answer.YES);
+    then
+        Question question7 = new Question("Interested in sciences", 7);
+        getAnswer(frame, question7, false);
+        insert(question7);
+        System.out.println(question7.questionText);
+end
+
+//Q4-NO
+rule "Q8"
+    when
+        q: Question(index==4, answer==Answer.NO);
+    then
+        Question question8 = new Question("Can you get a job", 8);
+        getAnswer(frame, question8, false);
+        insert(question8);
+        System.out.println(question8.questionText);
+end
+
+//Q5-YES
+rule "Q5-sol"
+    when
+        q: Question(index==5, answer==Answer.YES);
+    then
+        Solution solution = new Solution("Continue as long as you can");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q6-YES
+rule "Q9"
+    when
+        q: Question(index==6, answer==Answer.YES);
+    then
+        Question question9 = new Question("Are you good in english or french", 9);
+        getAnswer(frame, question9, false);
+        insert(question9);
+        System.out.println(question9.questionText);
+end
+
+//Q6-NO
+rule "Q6-sol"
+    when
+        q: Question(index==6, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Become a lawyer");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q7-YES
+rule "Q10"
+    when
+        q: Question(index==7, answer==Answer.YES);
+    then
+        Question question10 = new Question("Like outdoor work", 10);
+        getAnswer(frame, question10, false);
+        insert(question10);
+        System.out.println(question10.questionText);
+end
+
+//Q7-NO Q11-YES Q12-YES
+rule "Q7-sol"
+    when
+        q: Question((index==7 && answer==Answer.NO)||(index==11 && answer==Answer.YES)||(index==12 && answer==Answer.YES)||(index==42 && answer==Answer.YES));
+    then
+        Solution solution = new Solution("This flow-sheet can't help you");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q9-YES
+rule "Q11"
+    when
+        q: Question(index==9, answer==Answer.YES);
+    then
+        Question question11 = new Question("Want to become rich", 11);
+        getAnswer(frame, question11, false);
+        insert(question11);
+        System.out.println(question11.questionText);
+end
+
+//Q9-NO 18
+rule "Q9-sol"
+    when
+        q: Question(index==9, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Take remedial language class");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q10-YES
+rule "Q12"
+    when
+        q: Question(index==10, answer==Answer.YES);
+    then
+        Question question12 = new Question("Like biology", 12);
+        getAnswer(frame, question12, false);
+        insert(question12);
+        System.out.println(question12.questionText);
+end
+
+//Q10-NO
+rule "Q13"
+    when
+        q: Question(index==10, answer==Answer.NO);
+    then
+        Question question13 = new Question("Like electronics", 13);
+        getAnswer(frame, question13, false);
+        insert(question13);
+        System.out.println(question13.questionText);
+end
+
+//Q11-NO
+rule "Q14"
+    when
+        q: Question(index==11, answer==Answer.NO);
+    then
+        Question question14 = new Question("Interested in practical problems", 14);
+        getAnswer(frame, question14, false);
+        insert(question14);
+        System.out.println(question14.questionText);
+end
+
+//Q12-NO
+rule "Q12-sol"
+    when
+        q: Question(index==12, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Take surveying course");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q13-YES
+rule "Q13-sol"
+    when
+        q: Question(index==13, answer==Answer.YES);
+    then
+        Solution solution = new Solution("Take electronics course");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q14-YES
+rule "Q15"
+    when
+        q: Question(index==14, answer==Answer.YES);
+    then
+        Question question15 = new Question("Think these questions are endless", 15);
+        getAnswer(frame, question15, false);
+        insert(question15);
+        System.out.println(question15.questionText);
+end
+
+
+
+//Q14-NO
+rule "Q14-sol"
+    when
+        q: Question(index==14, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Become a statistician");
+        insert(solution);
+        System.out.println(solution.solutionText);
+end
+
+//Q15-YES
+rule "Q15-sol"
+    when
+        q: Question(index==15, answer==Answer.YES);
+    then
+        Solution solution = new Solution("You are too realistic to be an engineer");
+        System.out.println(solution.solutionText);
+end
+
+//Q15-NO
+rule "Q16"
+    when
+        q: Question(index==15, answer==Answer.NO);
+    then
+        Question question16 = new Question("Interested in science", 16);
+        getAnswer(frame, question16, false);
+        insert(question16);
+        System.out.println(question16.questionText);
+end
+
+//Q16-YES
+rule "Q17"
+    when
+        q: Question(index==16, answer==Answer.YES);
+    then
+        Question question17 = new Question("Interested in mathematics", 17);
+        getAnswer(frame, question17, false);
+        insert(question17);
+        System.out.println(question17.questionText);
+end
+
+//Q16-NO
+rule "Q16-sol"
+    when
+        q: Question(index==16, answer==Answer.NO);
+    then
+        Solution solution = new Solution("This flow sheet can not help you");
+        System.out.println(solution.solutionText);
+end
+
+//Q17-YES
+rule "Q18"
+    when
+        q: Question(index==17, answer==Answer.YES);
+    then
+         Question question18 = new Question("Good at mathematics", 18);
+         getAnswer(frame, question18, false);
+         insert(question18);
+         System.out.println(question18.questionText);
+end
+
+//Q17-NO
+rule "Q17-sol"
+    when
+        q: Question(index==17, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Become a field biologist");
+        System.out.println(solution.solutionText);
+end
+
+//Q18-YES
+rule "Q19"
+    when
+        q: Question(index==18, answer==Answer.YES);
+    then
+         Question question19 = new Question("Good at analytical problems", 19);
+         getAnswer(frame, question19, false);
+         insert(question19);
+         System.out.println(question19.questionText);
+end
+
+//Q18-NO
+rule "Q18-sol"
+    when
+        q: Question(index==18, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Become a technical journalist");
+        System.out.println(solution.solutionText);
+end
+
+//Q19-YES
+rule "Q20"
+    when
+        q: Question(index==19, answer==Answer.YES);
+    then
+         Question question20 = new Question("Prefer application over theory", 20);
+         getAnswer(frame, question20, false);
+         insert(question20);
+         System.out.println(question20.questionText);
+end
+
+//Q19-NO
+rule "Q19-sol"
+    when
+        q: Question(index==19, answer==Answer.NO);
+    then
+        Solution solution = new Solution("This flow sheet can not help you");
+        System.out.println(solution.solutionText);
+end
+
+//Q20-YES
+rule "Q21"
+    when
+        q: Question(index==20, answer==Answer.YES);
+    then
+         Question question21 = new Question("Like mathematics a lot", 21);
+         getAnswer(frame, question21, false);
+         insert(question21);
+         System.out.println(question21.questionText);
+end
+
+//Q20-NO
+rule "Q20-sol"
+    when
+        q: Question(index==20, answer==Answer.NO);
+    then
+        Solution solution = new Solution("Become a research scientist");
+        System.out.println(solution.solutionText);
+end
+
+//Q21-YES
+rule "Q22"
+    when
+        q: Question(index==21, answer==Answer.YES);
+    then
+         Question question22 = new Question("Like electronics", 22);
+         getAnswer(frame, question22, false);
+         insert(question22);
+         System.out.println(question22.questionText);
+end
+
+//Q21-NO
+rule "Q23"
+    when
+        q: Question(index==21, answer==Answer.NO);
+    then
+         Question question23 = new Question("Like geology", 23);
+         getAnswer(frame, question23, false);
+         insert(question23);
+         System.out.println(question23.questionText);
+end
+
+//Q22-YES
+rule "Q22-SOL"
+    when
+        q: Question(index==22, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take 4 years of electrical engineering");
+         System.out.println(solution.solutionText);
+end
+
+//Q22-NO
+rule "Q24"
+    when
+        q: Question(index==22, answer==Answer.NO);
+    then
+         Question question24 = new Question("Like chemistry", 24);
+         getAnswer(frame, question24, false);
+         insert(question24);
+         System.out.println(question24.questionText);
+end
+
+//Q23-YES
+rule "Q25"
+    when
+        q: Question(index==23, answer==Answer.YES);
+    then
+         Question question25 = new Question("Suffer from claustrophobia", 25);
+         getAnswer(frame, question25, false);
+         insert(question25);
+         System.out.println(question25.questionText);
+end
+
+//Q23-NO
+rule "Q26"
+    when
+        q: Question(index==23, answer==Answer.NO);
+    then
+         Question question26 = new Question("Like working with machinery", 26);
+         getAnswer(frame, question26, false);
+         insert(question26);
+         System.out.println(question26.questionText);
+end
+
+//Q24-YES
+rule "Q24-SOL"
+    when
+        q: Question(index==24, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take 4 years of chemical engineering");
+         System.out.println(solution.solutionText);
+end
+
+//Q24-NO
+rule "Q27"
+    when
+        q: Question(index==24, answer==Answer.NO);
+    then
+         Question question23 = new Question("Like geology", 23);
+         getAnswer(frame, question23, false);
+         insert(question23);
+         System.out.println(question23.questionText);
+end
+
+//Q13-NO
+rule "Q41"
+    when
+        q: Question(index==13, answer==Answer.NO);
+    then
+         Question question41 = new Question("Like working in shop", 41);
+         getAnswer(frame, question41, false);
+         insert(question41);
+         System.out.println(question41.questionText);
+end
+
+//Q41-YES
+rule "Q41-sol"
+    when
+        q: Question(index==41, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take machine shop course");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q41-NO
+rule "Q42"
+    when
+        q: Question(index==41, answer==Answer.NO);
+    then
+         Question question42 = new Question("Does all these detail bug you", 42);
+         getAnswer(frame, question42, false);
+         insert(question42);
+         System.out.println(question42.questionText);
+end
+
+//Q42-NO
+rule "Q43"
+    when
+        q: Question(index==42, answer==Answer.NO);
+    then
+         Question question43 = new Question("Like drafting", 43);
+         getAnswer(frame, question43, false);
+         insert(question43);
+         System.out.println(question43.questionText);
+end
+
+//Q43-YES
+rule "Q43-sol"
+    when
+        q: Question(index==43, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take drafting course");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q43-NO
+rule "Q44"
+    when
+        q: Question(index==43, answer==Answer.NO);
+    then
+         Question question44 = new Question("Do these questions make sense", 44);
+         getAnswer(frame, question44, false);
+         insert(question44);
+         System.out.println(question44.questionText);
+end
+
+//Q44-YES
+rule "Q45"
+    when
+        q: Question(index==44, answer==Answer.YES);
+    then
+         Question question45 = new Question("Like chemistry", 45);
+         getAnswer(frame, question45, false);
+         insert(question45);
+         System.out.println(question45.questionText);
+end
+
+//Q44-NO
+rule "Q44-sol"
+    when
+        q: Question(index==44, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Go jump in the lake");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q45-YES
+rule "Q45-sol-yes"
+    when
+        q: Question(index==45, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take chemical technology course");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+//Q45-NO
+rule "Q45-sol-no"
+    when
+        q: Question(index==45, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Consult calendar for other solutions");
+         insert(solution);
+         System.out.println(solution.solutionText);
+end
+
+function void getAnswer(JFrame frame, Question question, boolean containsMaybe) {
+
+    final JPanel panel = new JPanel(new GridLayout (0,1));
+    panel.add(new JLabel(question.getQuestionText()));
+
+    class ButtonListener implements ItemListener {
+        private Question question;
+        private Answer answer;
+        public ButtonListener(Question question, Answer answer) {
+            this.question = question;
+            this.answer = answer;
+        }
+
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+        if (event.getStateChange() == ItemEvent.SELECTED) {
+            question.setAnswer(answer);
+            }
+        }
+     }
+
+     JRadioButton yesButton = new JRadioButton(Answer.YES.toString());
+     yesButton.addItemListener(new ButtonListener(question, Answer.YES));
+
+     JRadioButton noButton = new JRadioButton(Answer.NO.toString());
+     noButton.addItemListener(new ButtonListener(question, Answer.NO));
+
+     JRadioButton maybeButton = new JRadioButton(Answer.MAYBE.toString());
+     maybeButton.addItemListener(new ButtonListener(question, Answer.MAYBE));
+
+     List<JRadioButton> buttons = containsMaybe ? Arrays.asList(yesButton, noButton, maybeButton)
+     : Arrays.asList(yesButton, noButton);
+     ButtonGroup group = new ButtonGroup();
+
+     for (JRadioButton button : buttons) {
+         panel.add(button);
+         //prevents from choosing 2 options
+         group.add(button);
+     }
+
+
+     final ImageIcon icon = new ImageIcon(new URL("https://raw.githubusercontent.com/szczupag/career-path/3-rules/src/main/resources/img/engineer.png"));
+     JOptionPane.showConfirmDialog(frame, panel, "Should you be an engineer?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+}
+
+function void displaySolution(JFrame frame, Solution solution) {
+        final JPanel panel = new JPanel();
+        panel.add(new JLabel(solution.solutionText));
+        final ImageIcon icon = new ImageIcon(new URL("https://raw.githubusercontent.com/szczupag/career-path/3-rules/src/main/resources/img/engineer.png"));
+        JOptionPane.showMessageDialog(frame, panel, "Should you be an engineer?", JOptionPane.PLAIN_MESSAGE, icon);
+}

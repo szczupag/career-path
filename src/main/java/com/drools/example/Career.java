@@ -1,4 +1,5 @@
 package com.drools.example;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
