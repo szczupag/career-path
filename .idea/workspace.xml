@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae5f05d0-f830-473d-8e39-f2abc0593b32" name="Default Changelist" comment="">
+    <list default="true" id="ae5f05d0-f830-473d-8e39-f2abc0593b32" name="Default Changelist" comment="solution inserts">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/rules/rules.drl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/rules/rules.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/drools/example/Career$Answer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/drools/example/Career$Answer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/drools/example/Career$Question.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/drools/example/Career$Question.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/drools/example/Career$Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/drools/example/Career$Solution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/drools/example/Career.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/drools/example/Career.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rules/rules.drl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rules/rules.drl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,15 +57,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Drools" value="4665" />
+          <entry key="Drools" value="4824" />
           <entry key="JAVA" value="1249" />
-          <entry key="PLAIN_TEXT" value="132" />
+          <entry key="PLAIN_TEXT" value="172" />
           <entry key="XML" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
         <counts>
-          <entry key="git.branch.checkout.local" value="6" />
+          <entry key="git.branch.checkout.local" value="7" />
           <entry key="git.branch.checkout.remote" value="1" />
           <entry key="git.branch.delete.local" value="3" />
           <entry key="git.branch.delete.remote" value="1" />
@@ -72,8 +78,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/rules/rules.drl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="590" column="3" lean-forward="true" selection-start-line="590" selection-start-column="3" selection-end-line="590" selection-end-column="3" />
+            <state relative-caret-position="469">
+              <caret line="646" column="53" lean-forward="true" selection-start-line="646" selection-start-column="53" selection-end-line="646" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -168,8 +174,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="x" value="232" />
+    <option name="y" value="150" />
     <option name="width" value="1680" />
     <option name="height" value="956" />
   </component>
@@ -232,6 +239,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="drools-intro" type="b2602c69:ProjectViewProjectNode" />
+              <item name="drools-intro" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="rules" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -250,7 +265,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="254" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544397299328" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544466387078" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -460,7 +475,7 @@
       <workItem from="1544389671235" duration="258000" />
       <workItem from="1544389984639" duration="2268000" />
       <workItem from="1544392732914" duration="3999000" />
-      <workItem from="1544460236780" duration="1598000" />
+      <workItem from="1544460236780" duration="3896000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1544289308791</created>
@@ -504,35 +519,66 @@
       <option name="project" value="LOCAL" />
       <updated>1544397145157</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="rules 41 - 45">
+      <created>1544463928130</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544463928130</updated>
+    </task>
+    <task id="LOCAL-00008" summary="solution inserts">
+      <created>1544464722080</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1544464722080</updated>
+    </task>
+    <task id="LOCAL-00009" summary="window icon">
+      <created>1544466040650</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1544466040650</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32401000" />
+    <option name="totallyTimeSpent" value="34699000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="956" extended-state="6" />
+    <frame x="753" y="0" width="927" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="UI Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.115384616" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.21355931" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.502442" side_tool="true" weight="0.1736111" />
       <window_info anchor="bottom" id="Java Enterprise" order="1" />
-      <window_info anchor="bottom" id="Messages" order="2" sideWeight="0.496337" weight="0.3287037" />
+      <window_info anchor="bottom" id="Messages" order="2" sideWeight="0.496337" weight="0.32857144" />
       <window_info anchor="bottom" id="Database Changes" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="4" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="5" sideWeight="0.497558" visible="true" weight="0.1736111" />
+      <window_info anchor="bottom" id="Terminal" order="5" sideWeight="0.497558" weight="0.32244897" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32959184" />
-      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.5445666" weight="0.33449075" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.5445666" visible="true" weight="0.33367348" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="TODO" order="12" weight="0.3298611" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Maven Projects" order="1" />
       <window_info anchor="right" id="Database" order="2" />
@@ -559,7 +605,10 @@
     <MESSAGE value="currentQuestion class added2" />
     <MESSAGE value="first 25 rules" />
     <MESSAGE value="removed jpanel icon" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed jpanel icon" />
+    <MESSAGE value="rules 41 - 45" />
+    <MESSAGE value="solution inserts" />
+    <MESSAGE value="window icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="window icon" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drools/example/HelloWorld.java" />
@@ -599,8 +648,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/rules/rules.drl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="590" column="3" lean-forward="true" selection-start-line="590" selection-start-column="3" selection-end-line="590" selection-end-column="3" />
+        <state relative-caret-position="469">
+          <caret line="646" column="53" lean-forward="true" selection-start-line="646" selection-start-column="53" selection-end-line="646" selection-end-column="53" />
         </state>
       </provider>
     </entry>

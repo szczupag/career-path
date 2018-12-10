@@ -17,6 +17,8 @@ import javax.swing.JOptionPane
 import javax.swing.JFrame
 import java.util.List
 import java.awt.Color
+import javax.swing.ImageIcon
+import java.net.URL
 
 global JFrame frame
 
@@ -635,11 +637,14 @@ function void getAnswer(JFrame frame, Question question, boolean containsMaybe) 
          group.add(button);
      }
 
-     JOptionPane.showConfirmDialog(frame, panel, "Should you be an engineer?", JOptionPane.DEFAULT_OPTION);
+
+     final ImageIcon icon = new ImageIcon(new URL("https://raw.githubusercontent.com/szczupag/career-path/master/src/main/resources/img/engineer.png"));
+     JOptionPane.showConfirmDialog(frame, panel, "Should you be an engineer?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
 }
 
 function void displaySolution(JFrame frame, Solution solution) {
         final JPanel panel = new JPanel();
         panel.add(new JLabel(solution.solutionText));
-        JOptionPane.showMessageDialog(frame, panel, "Should you be an engineer?", JOptionPane.PLAIN_MESSAGE);
+        final ImageIcon icon = new ImageIcon(new URL("https://raw.githubusercontent.com/szczupag/career-path/master/src/main/resources/img/engineer.png"));
+        JOptionPane.showMessageDialog(frame, panel, "Should you be an engineer?", JOptionPane.PLAIN_MESSAGE, icon);
 }
