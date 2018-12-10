@@ -182,7 +182,7 @@ end
 //Q7-NO Q11-YES Q12-YES
 rule "Q7-sol"
     when
-        q: Question((index==7 && answer==Answer.NO)||(index==11 && answer==Answer.YES)||(index==12 && answer==Answer.YES));
+        q: Question((index==7 && answer==Answer.NO)||(index==11 && answer==Answer.YES)||(index==12 && answer==Answer.YES)||(index==42 && answer==Answer.YES));
     then
         Solution solution = new Solution("This flow-sheet can't help you");
         insert(solution);
@@ -488,6 +488,106 @@ rule "Q27"
          getAnswer(frame, question23, false);
          insert(question23);
          System.out.println(question23.questionText);
+end
+
+//Q13-NO
+rule "Q41"
+    when
+        q: Question(index==13, answer==Answer.NO);
+    then
+         Question question41 = new Question("Like geology", 41);
+         getAnswer(frame, question41, false);
+         insert(question41);
+         System.out.println(question41.questionText);
+end
+
+//Q41-YES
+rule "Q41-sol"
+    when
+        q: Question(index==41, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take machine shop course");
+         System.out.println(solution.solutionText);
+end
+
+//Q41-NO
+rule "Q42"
+    when
+        q: Question(index==41, answer==Answer.NO);
+    then
+         Question question42 = new Question("Does all these detail bug you", 42);
+         getAnswer(frame, question42, false);
+         insert(question42);
+         System.out.println(question42.questionText);
+end
+
+//Q42-NO
+rule "Q43"
+    when
+        q: Question(index==42, answer==Answer.NO);
+    then
+         Question question43 = new Question("Like drafting", 43);
+         getAnswer(frame, question43, false);
+         insert(question43);
+         System.out.println(question43.questionText);
+end
+
+//Q43-YES
+rule "Q43-sol"
+    when
+        q: Question(index==43, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take drafting course");
+         System.out.println(solution.solutionText);
+end
+
+//Q43-NO
+rule "Q44"
+    when
+        q: Question(index==43, answer==Answer.NO);
+    then
+         Question question44 = new Question("Do these questions make sense", 44);
+         getAnswer(frame, question44, false);
+         insert(question44);
+         System.out.println(question44.questionText);
+end
+
+//Q44-YES
+rule "Q45"
+    when
+        q: Question(index==44, answer==Answer.YES);
+    then
+         Question question45 = new Question("Like chemistry", 45);
+         getAnswer(frame, question45, false);
+         insert(question45);
+         System.out.println(question45.questionText);
+end
+
+//Q44-NO
+rule "Q43-sol"
+    when
+        q: Question(index==44, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Go jump in the lake");
+         System.out.println(solution.solutionText);
+end
+
+//Q45-YES
+rule "Q45-sol-yes"
+    when
+        q: Question(index==45, answer==Answer.YES);
+    then
+         Solution solution = new Solution("Take chemical technology course");
+         System.out.println(solution.solutionText);
+end
+
+//Q45-NO
+rule "Q45-sol-no"
+    when
+        q: Question(index==45, answer==Answer.NO);
+    then
+         Solution solution = new Solution("Consult calendar for other solutions");
+         System.out.println(solution.solutionText);
 end
 
 function void getAnswer(JFrame frame, Question question, boolean containsMaybe) {
