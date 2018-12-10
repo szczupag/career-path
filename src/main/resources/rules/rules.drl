@@ -15,6 +15,8 @@ import javax.swing.JPanel
 import javax.swing.ButtonGroup
 import javax.swing.JOptionPane
 import javax.swing.JFrame
+import java.util.List
+import java.awt.Color
 
 global JFrame frame
 
@@ -43,7 +45,6 @@ rule "Q2"
     then
         Question question2 = new Question("Marks higher than 60%", 2);
 	    getAnswer(frame, question2, false);
-	    retract(q);
 	    insert(question2);
 		System.out.println(question2.questionText);
 end
@@ -54,7 +55,6 @@ rule "Q1-sol"
         q: Question(index==1, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a hippie");
-        retract(q);
         insert(solution);
 		System.out.println(solution.solutionText);
 end
@@ -66,7 +66,6 @@ rule "Q3"
     then
         Question question3 = new Question("Willing to study hard", 3);
         getAnswer(frame, question3, true);
-        retract(q);
         insert(question3);
         System.out.println(question3.questionText);
 end
@@ -80,7 +79,6 @@ rule "Q4"
     then
         Question question4 = new Question("Want further schooling", 4);
         getAnswer(frame, question4, false);
-        retract(q);
         insert(question4);
         System.out.println(question4.questionText);
 end
@@ -91,7 +89,6 @@ rule "Q3-sol"
         q: Question(index==3, answer==Answer.MAYBE);
     then
         Solution solution = new Solution("Go to work for a year");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -103,7 +100,6 @@ rule "Q5"
     then
         Question question5 = new Question("Will it last", 5);
         getAnswer(frame, question5, false);
-        retract(q);
         insert(question5);
         System.out.println(question5.questionText);
 end
@@ -115,7 +111,6 @@ rule "Q6"
     then
         Question question6 = new Question("Do you want to help society", 6);
         getAnswer(frame, question6, false);
-        retract(q);
         insert(question6);
         System.out.println(question6.questionText);
 end
@@ -127,7 +122,6 @@ rule "Q7"
     then
         Question question7 = new Question("Interested in sciences", 7);
         getAnswer(frame, question7, false);
-        retract(q);
         insert(question7);
         System.out.println(question7.questionText);
 end
@@ -139,7 +133,6 @@ rule "Q8"
     then
         Question question8 = new Question("Can you get a job", 8);
         getAnswer(frame, question8, false);
-        retract(q);
         insert(question8);
         System.out.println(question8.questionText);
 end
@@ -150,7 +143,6 @@ rule "Q5-sol"
         q: Question(index==5, answer==Answer.YES);
     then
         Solution solution = new Solution("Continue as long as you can");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -162,7 +154,6 @@ rule "Q9"
     then
         Question question9 = new Question("Are you good in english or french", 9);
         getAnswer(frame, question9, false);
-        retract(q);
         insert(question9);
         System.out.println(question9.questionText);
 end
@@ -173,7 +164,6 @@ rule "Q6-sol"
         q: Question(index==6, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a lawyer");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -185,7 +175,6 @@ rule "Q10"
     then
         Question question10 = new Question("Like outdoor work", 10);
         getAnswer(frame, question10, false);
-        retract(q);
         insert(question10);
         System.out.println(question10.questionText);
 end
@@ -196,7 +185,6 @@ rule "Q7-sol"
         q: Question((index==7 && answer==Answer.NO)||(index==11 && answer==Answer.YES)||(index==12 && answer==Answer.YES));
     then
         Solution solution = new Solution("This flow-sheet can't help you");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -208,7 +196,6 @@ rule "Q11"
     then
         Question question11 = new Question("Want to become rich", 11);
         getAnswer(frame, question11, false);
-        retract(q);
         insert(question11);
         System.out.println(question11.questionText);
 end
@@ -219,7 +206,6 @@ rule "Q9-sol"
         q: Question(index==9, answer==Answer.NO);
     then
         Solution solution = new Solution("Take remedial language class");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -231,7 +217,6 @@ rule "Q12"
     then
         Question question12 = new Question("Like biology", 12);
         getAnswer(frame, question12, false);
-        retract(q);
         insert(question12);
         System.out.println(question12.questionText);
 end
@@ -243,7 +228,6 @@ rule "Q13"
     then
         Question question13 = new Question("Like electronics", 13);
         getAnswer(frame, question13, false);
-        retract(q);
         insert(question13);
         System.out.println(question13.questionText);
 end
@@ -255,7 +239,6 @@ rule "Q14"
     then
         Question question14 = new Question("Interested in practical problems", 14);
         getAnswer(frame, question14, false);
-        retract(q);
         insert(question14);
         System.out.println(question14.questionText);
 end
@@ -266,7 +249,6 @@ rule "Q12-sol"
         q: Question(index==12, answer==Answer.NO);
     then
         Solution solution = new Solution("Take surveying course");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -277,7 +259,6 @@ rule "Q13-sol"
         q: Question(index==13, answer==Answer.YES);
     then
         Solution solution = new Solution("Take electronics course");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -289,7 +270,6 @@ rule "Q15"
     then
         Question question15 = new Question("Think these questions are endless", 15);
         getAnswer(frame, question15, false);
-        retract(q);
         insert(question15);
         System.out.println(question15.questionText);
 end
@@ -302,7 +282,6 @@ rule "Q14-sol"
         q: Question(index==14, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a statistician");
-        retract(q);
         insert(solution);
         System.out.println(solution.solutionText);
 end
@@ -313,7 +292,6 @@ rule "Q15-sol"
         q: Question(index==15, answer==Answer.YES);
     then
         Solution solution = new Solution("You are too realistic to be an engineer");
-        retract(q);
         System.out.println(solution.solutionText);
 end
 
@@ -324,7 +302,6 @@ rule "Q16"
     then
         Question question16 = new Question("Interested in science", 16);
         getAnswer(frame, question16, false);
-        retract(q);
         insert(question16);
         System.out.println(question16.questionText);
 end
@@ -336,7 +313,6 @@ rule "Q17"
     then
         Question question17 = new Question("Interested in mathematics", 17);
         getAnswer(frame, question17, false);
-        retract(q);
         insert(question17);
         System.out.println(question17.questionText);
 end
@@ -347,7 +323,6 @@ rule "Q16-sol"
         q: Question(index==16, answer==Answer.NO);
     then
         Solution solution = new Solution("This flow sheet can not help you");
-        retract(q);
         System.out.println(solution.solutionText);
 end
 
@@ -358,7 +333,6 @@ rule "Q18"
     then
          Question question18 = new Question("Good at mathematics", 18);
          getAnswer(frame, question18, false);
-         retract(q);
          insert(question18);
          System.out.println(question18.questionText);
 end
@@ -369,7 +343,6 @@ rule "Q17-sol"
         q: Question(index==17, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a field biologist");
-        retract(q);
         System.out.println(solution.solutionText);
 end
 
@@ -380,7 +353,6 @@ rule "Q19"
     then
          Question question19 = new Question("Good at analytical problems", 19);
          getAnswer(frame, question19, false);
-         retract(q);
          insert(question19);
          System.out.println(question19.questionText);
 end
@@ -391,7 +363,6 @@ rule "Q18-sol"
         q: Question(index==18, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a technical journalist");
-        retract(q);
         System.out.println(solution.solutionText);
 end
 
@@ -402,7 +373,6 @@ rule "Q20"
     then
          Question question20 = new Question("Prefer application over theory", 20);
          getAnswer(frame, question20, false);
-         retract(q);
          insert(question20);
          System.out.println(question20.questionText);
 end
@@ -413,7 +383,6 @@ rule "Q19-sol"
         q: Question(index==19, answer==Answer.NO);
     then
         Solution solution = new Solution("This flow sheet can not help you");
-        retract(q);
         System.out.println(solution.solutionText);
 end
 
@@ -424,7 +393,6 @@ rule "Q21"
     then
          Question question21 = new Question("Like mathematics a lot", 21);
          getAnswer(frame, question21, false);
-         retract(q);
          insert(question21);
          System.out.println(question21.questionText);
 end
@@ -435,7 +403,6 @@ rule "Q20-sol"
         q: Question(index==20, answer==Answer.NO);
     then
         Solution solution = new Solution("Become a research scientist");
-        retract(q);
         System.out.println(solution.solutionText);
 end
 
@@ -446,7 +413,6 @@ rule "Q22"
     then
          Question question22 = new Question("Like electronics", 22);
          getAnswer(frame, question22, false);
-         retract(q);
          insert(question22);
          System.out.println(question22.questionText);
 end
@@ -458,7 +424,6 @@ rule "Q23"
     then
          Question question23 = new Question("Like geology", 23);
          getAnswer(frame, question23, false);
-         retract(q);
          insert(question23);
          System.out.println(question23.questionText);
 end
@@ -469,7 +434,6 @@ rule "Q22-SOL"
         q: Question(index==22, answer==Answer.YES);
     then
          Solution solution = new Solution("Take 4 years of electrical engineering");
-         retract(q);
          System.out.println(solution.solutionText);
 end
 
@@ -480,7 +444,6 @@ rule "Q24"
     then
          Question question24 = new Question("Like chemistry", 24);
          getAnswer(frame, question24, false);
-         retract(q);
          insert(question24);
          System.out.println(question24.questionText);
 end
@@ -492,7 +455,6 @@ rule "Q25"
     then
          Question question25 = new Question("Suffer from claustrophobia", 25);
          getAnswer(frame, question25, false);
-         retract(q);
          insert(question25);
          System.out.println(question25.questionText);
 end
@@ -504,7 +466,6 @@ rule "Q26"
     then
          Question question26 = new Question("Like working with machinery", 26);
          getAnswer(frame, question26, false);
-         retract(q);
          insert(question26);
          System.out.println(question26.questionText);
 end
@@ -515,7 +476,6 @@ rule "Q24-SOL"
         q: Question(index==24, answer==Answer.YES);
     then
          Solution solution = new Solution("Take 4 years of chemical engineering");
-         retract(q);
          System.out.println(solution.solutionText);
 end
 
@@ -526,72 +486,55 @@ rule "Q27"
     then
          Question question23 = new Question("Like geology", 23);
          getAnswer(frame, question23, false);
-         retract(q);
          insert(question23);
          System.out.println(question23.questionText);
 end
 
+function void getAnswer(JFrame frame, Question question, boolean containsMaybe) {
 
+    final JPanel panel = new JPanel(new GridLayout (0,1));
+    panel.add(new JLabel(question.getQuestionText()));
 
+    class ButtonListener implements ItemListener {
+        private Question question;
+        private Answer answer;
+        public ButtonListener(Question question, Answer answer) {
+            this.question = question;
+            this.answer = answer;
+        }
 
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+        if (event.getStateChange() == ItemEvent.SELECTED) {
+            question.setAnswer(answer);
+            }
+        }
+     }
 
+     JRadioButton yesButton = new JRadioButton(Answer.YES.toString());
+     yesButton.addItemListener(new ButtonListener(question, Answer.YES));
 
+     JRadioButton noButton = new JRadioButton(Answer.NO.toString());
+     noButton.addItemListener(new ButtonListener(question, Answer.NO));
 
+     JRadioButton maybeButton = new JRadioButton(Answer.MAYBE.toString());
+     maybeButton.addItemListener(new ButtonListener(question, Answer.MAYBE));
 
+     List<JRadioButton> buttons = containsMaybe ? Arrays.asList(yesButton, noButton, maybeButton)
+     : Arrays.asList(yesButton, noButton);
+     ButtonGroup group = new ButtonGroup();
 
+     for (JRadioButton button : buttons) {
+         panel.add(button);
+         //prevents from choosing 2 options
+         group.add(button);
+     }
 
+     JOptionPane.showConfirmDialog(frame, panel, "Should you be an engineer?", JOptionPane.DEFAULT_OPTION);
+}
 
 function void displaySolution(JFrame frame, Solution solution) {
         final JPanel panel = new JPanel();
         panel.add(new JLabel(solution.solutionText));
         JOptionPane.showMessageDialog(frame, panel, "Should you be an engineer?", JOptionPane.PLAIN_MESSAGE);
-}
-
-function Question getAnswer(JFrame frame, Question question, boolean containsMaybe) {
-
-
-        class ButtonListener implements ItemListener {
-                    private Question question;
-                    private Answer answer;
-                    public ButtonListener(Question question, Answer answer) {
-                            this.question = question;
-                            this.answer = answer;
-                    }
-
-                    @Override
-                    public void itemStateChanged(ItemEvent event) {
-                            if (event.getStateChange() == ItemEvent.SELECTED) {
-                                question.setAnswer(answer);
-                            }
-                    }
-                }
-
-        final JPanel panel = new JPanel(new GridLayout (0,1));
-        panel.add(new JLabel(question.getQuestionText()));
-        ArrayList<JRadioButton> buttons = new ArrayList<>();
-
-        JRadioButton yesButton = new JRadioButton(Answer.YES.toString());
-        yesButton.addItemListener(new ButtonListener(question, Answer.YES));
-
-        JRadioButton noButton = new JRadioButton(Answer.NO.toString());
-        noButton.addItemListener(new ButtonListener(question, Answer.NO));
-
-        JRadioButton maybeButton = new JRadioButton(Answer.MAYBE.toString());
-        maybeButton.addItemListener(new ButtonListener(question, Answer.MAYBE));
-
-        if(containsMaybe) {
-            buttons.addAll(Arrays.asList(yesButton, noButton, maybeButton));
-        } else {
-            buttons.addAll(Arrays.asList(yesButton, noButton));
-        }
-
-        ButtonGroup group = new ButtonGroup();
-        for (int i=0;i<buttons.size();i++) {
-            group.add(buttons.get(i));
-            panel.add(buttons.get(i));
-        }
-
-        JOptionPane.showConfirmDialog(frame, panel, "Should you be an engineer?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        return question;
 }
